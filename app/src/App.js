@@ -1,12 +1,13 @@
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap/dist/js/bootstrap';
+import 'bootstrap/dist/js/bootstrap';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
 import LoginForm from './pages/LoginForm';
 import Footer from './components/Footer';
+import ScrabbleTitle from './components/ScrabbleTitle';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <div className="page-container">
         <div className="content-wrap">
           <Header />
+          <ScrabbleTitle />
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Home />} />
