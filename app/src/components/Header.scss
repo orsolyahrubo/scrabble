@@ -1,0 +1,31 @@
+.nav-link {
+    border-color: rgb(79, 62, 49);
+    color: rgb(77, 56, 37);
+    text-align: center;
+
+    &:hover {
+        background-color: rgba(235, 113, 0, 0.2);
+        border-color: rgb(75, 59, 43);
+        color: rgb(77, 56, 37);
+        text-align: center;
+    }
+}
+
+.navbar-brand {
+    color: rgb(77, 56, 37);
+    text-align: center;
+    font-size: 30px;
+
+    &:hover {
+        color: rgb(77, 56, 37);
+        text-align: center;
+    }
+}
+
+img {
+    width: 70px;
+}
+
+.navbar-brand {
+    font-size: 30px;
+}
