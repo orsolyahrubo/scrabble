@@ -15,7 +15,7 @@ function App() {
       <div className="page-container">
         <div className="content-wrap">
           <Header />
-          <ScrabbleTitle />
+          <ScrabbleTitle value={'B'} score={2} />
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Home />} />
