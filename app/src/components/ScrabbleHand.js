@@ -1,31 +1,26 @@
-import './ScrabbleTitle.scss'
-import { useEffect, useState } from "react";
-import ScrabbleTitle from './ScrabbleTitle'
-
+import ScrabbleTile from './ScrabbleTile'
 
 export default function ScrabbleHand({ arrOfPlayersCurrentLetters }) {
 
-    const [arrOfLetters, setArrOfLetters] = useState([]);
-
-    useEffect(() => {
-        setArrOfLetters(arrOfPlayersCurrentLetters)
-    }, [arrOfPlayersCurrentLetters])
-
-    // I might want to use context for this and useEffect if this changes than it can rerender should I?
-
     return (
-        <div className='container border border-warning p-0 text-center'>
-            {arrOfLetters.length > 0 ? (
-                <>
-                    {arrOfLetters.map((tile) => (
-                        <ScrabbleTitle value={tile.value} score={tile.score} />
-                    ))}
-                </>
-            ) : (
-                <p>There are no letters in your hand.</p>
-            )
-            }
-        </div>
+        <>
+            <div className='container border border-warning p-0 text-center'>
+                {arrOfPlayersCurrentLetters.length > 0 ? (
+                    <>
+                        {arrOfPlayersCurrentLetters.map((tile) => (
+                            <ScrabbleTile value={tile.value} score={tile.score} />
+                        ))}
+                    </>
+                ) : (
+                    <p>There are no letters in your hand.</p>
+                )
+                }
+            </div>
+            <div className='d-flex justify-content-center'>
+                <button className='d-md-block btn btn-outline-warning'>Put down</button>
+            </div>
+        </>
+
 
     )
 }
