@@ -1,8 +1,9 @@
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { GameContext } from './contexts/GameContext';
 import Header from './components/Header';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
@@ -13,23 +14,8 @@ import ScrabbleHand from './components/ScrabbleHand';
 import ScrabbleBoard from './components/ScrabbleBoard';
 
 function App() {
-  const [currentBoard, setCurrentBoard] = useState(Array(15).fill(Array(15).fill(null)));
 
-  useEffect(() => {
-    const fakeTile = { value: 'A', score: 1 };
-    setCurrentBoard(currentBoard => {
-      const newBoard = currentBoard.map((row, rowIndex) => {
-        return row.map((element, columnIndex) => {
-          if (rowIndex === 3 && columnIndex === 2) {
-            return fakeTile;
-          }
-          return element;
-        });
-      }
-      );
-      return newBoard;
-    });
-  }, []);
+  const { currentBoard } = useContext(GameContext);
 
   return (
     <BrowserRouter>
