@@ -14,15 +14,6 @@ import ScrabbleBoard from './components/ScrabbleBoard';
 
 function App() {
   const [currentBoard, setCurrentBoard] = useState(Array(15).fill(Array(15).fill(null)));
-  // const [arrOfPlayersCurrentLetters, setArrOfPlayersCurrentLetters] = useState([]);
-
-  // useEffect(() => {
-  //   fetch('http://localhost:3001/api/board')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       setCurrentBoard(data);
-  //     });
-  // }, [currentBoard]);
 
   useEffect(() => {
     const fakeTile = { value: 'A', score: 1 };
