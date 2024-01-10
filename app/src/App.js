@@ -9,6 +9,7 @@ import LoginForm from './pages/LoginForm';
 import Footer from './components/Footer';
 import ScrabbleTile from './components/ScrabbleTile';
 import ScrabbleHand from './components/ScrabbleHand';
+import ScrabbleBoard from './components/ScrabbleBoard';
 
 function App() {
   return (
@@ -17,7 +18,9 @@ function App() {
         <div className="content-wrap">
           <Header />
           <ScrabbleTile value={'B'} score={2} />
+          <ScrabbleTile />
           <ScrabbleHand arrOfPlayersCurrentLetters={[{ value: 'C', score: 3 }, { value: 'D', score: 4 }, { value: 'C', score: 3 }, { value: 'D', score: 4 }, { value: 'C', score: 3 }, { value: 'D', score: 4 }, { value: 'C', score: 3 }, { value: 'D', score: 4 }]} />
+          <ScrabbleBoard />
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Home />} />
