@@ -7,7 +7,8 @@ import NotFound from './pages/NotFound';
 import Home from './pages/Home';
 import LoginForm from './pages/LoginForm';
 import Footer from './components/Footer';
-import ScrabbleTitle from './components/ScrabbleTitle';
+import ScrabbleTile from './components/ScrabbleTile';
+import ScrabbleHand from './components/ScrabbleHand';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       <div className="page-container">
         <div className="content-wrap">
           <Header />
-          <ScrabbleTitle value={'B'} score={2} />
+          <ScrabbleTile value={'B'} score={2} />
+          <ScrabbleHand arrOfPlayersCurrentLetters={[{ value: 'C', score: 3 }, { value: 'D', score: 4 }, { value: 'C', score: 3 }, { value: 'D', score: 4 }, { value: 'C', score: 3 }, { value: 'D', score: 4 }, { value: 'C', score: 3 }, { value: 'D', score: 4 }]} />
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Home />} />
