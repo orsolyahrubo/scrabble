@@ -7,8 +7,8 @@ export default function ScrabbleHand({ arrOfPlayersCurrentLetters }) {
             <div className='container border border-warning p-0 text-center'>
                 {arrOfPlayersCurrentLetters.length > 0 ? (
                     <>
-                        {arrOfPlayersCurrentLetters.map((tile) => (
-                            <ScrabbleTile value={tile.value} score={tile.score} />
+                        {arrOfPlayersCurrentLetters.map((tile, index) => (
+                            <ScrabbleTile key={index} value={tile.value} score={tile.score} />
                         ))}
                     </>
                 ) : (

@@ -1,5 +1,14 @@
 .tile {
     background-color: rgb(113, 107, 105);
     padding-bottom: 0;
-    height: fit-content;
+    height: 60px;
+    width: 60px;
+}
+
+.emptyTile {
+    background-color: rgb(252, 243, 240);
+    padding-bottom: 0;
+    height: 60px;
+    width: 60px;
+    border: black 1px solid;
 }
