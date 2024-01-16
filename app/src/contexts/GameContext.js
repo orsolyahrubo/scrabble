@@ -7,7 +7,7 @@ export default function GameContextProvider({ children }) {
     const [errormessage, setErrorMessage] = useState(null);
     const [currentBoard, setCurrentBoard] = useState(Array(15).fill(Array(15).fill(null)));
     const [currentPlayer, setCurrentPlayer] = useState(null);
-    const [currentTile, setCurrentTile] = useState(null);
+    const [currentTile, _setCurrentTile] = useState(null);
     const [currentMove, setCurrentMove] = useState(null);
 
 
@@ -26,8 +26,8 @@ export default function GameContextProvider({ children }) {
         });
     }
 
-    async function getCurrentTile(value, score) {
-        setCurrentTile({ value, score });
+    async function setCurrentTile(value, score) {
+        _setCurrentTile({ value, score });
     }
 
     useEffect(() => {
@@ -37,7 +37,7 @@ export default function GameContextProvider({ children }) {
     return (
         // eslint-disable-next-line react/jsx-no-constructed-context-values
         <GameContext.Provider value={{
-            errormessage, setErrorMessage, currentBoard, setCurrentTile, currentTile, getCurrentTile
+            errormessage, setErrorMessage, currentBoard, setCurrentTile, currentTile
         }}
         >
             {children}

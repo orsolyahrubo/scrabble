@@ -17,6 +17,10 @@ function App() {
 
   const { currentBoard, currentTile } = useContext(GameContext);
 
+  // const playersTiles = [
+  //   { value: 'C', score: 3, id },
+  // ]
+
   return (
     <BrowserRouter>
       <div className="page-container">
