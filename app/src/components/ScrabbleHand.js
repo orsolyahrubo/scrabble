@@ -1,10 +1,11 @@
 import ScrabbleTile from './ScrabbleTile'
+import './ScrabbleHand.scss'
 import { useContext } from 'react';
 import { GameContext } from '../contexts/GameContext';
 
 export default function ScrabbleHand({ arrOfPlayersCurrentLetters }) {
 
-    const { setCurrentTile } = useContext(GameContext);
+    const { setCurrentTile, currentTile } = useContext(GameContext);
 
     return (
         <>
@@ -15,6 +16,7 @@ export default function ScrabbleHand({ arrOfPlayersCurrentLetters }) {
                             <ScrabbleTile
                                 id={tile.id}
                                 key={tile.id}
+                                classNameForSelecting={currentTile?.id === tile.id ? 'selected' : ''}
                                 value={tile.value}
                                 score={tile.score}
                                 setCurrentTile={() => setCurrentTile(tile.value, tile.score, tile.id)} />

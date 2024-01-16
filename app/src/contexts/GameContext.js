@@ -10,7 +10,6 @@ export default function GameContextProvider({ children }) {
     const [currentTile, _setCurrentTile] = useState(null);
     const [currentMove, setCurrentMove] = useState(null);
 
-
     async function makeFakeBoard() {
         const fakeTile = { value: 'A', score: 1 };
         setCurrentBoard(currentBoard => {
@@ -27,7 +26,11 @@ export default function GameContextProvider({ children }) {
     }
 
     async function setCurrentTile(value, score, id) {
-        _setCurrentTile({ value, score, id });
+        if (!currentTile) {
+            _setCurrentTile({ value, score, id });
+        } else if (currentTile.id === id) {
+            _setCurrentTile(null);
+        }
     }
 
     useEffect(() => {
