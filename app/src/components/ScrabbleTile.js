@@ -1,4 +1,5 @@
 import './ScrabbleTile.scss'
+import uuid from 'react-uuid';
 import { useContext } from 'react';
 import { GameContext } from '../contexts/GameContext';
 
