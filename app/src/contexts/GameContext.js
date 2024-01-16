@@ -25,14 +25,6 @@ export default function GameContextProvider({ children }) {
         });
     }
 
-    async function setCurrentTile(value, score, id) {
-        if (!currentTile || currentTile.id !== id) {
-            _setCurrentTile({ value, score, id });
-        } else if (currentTile.id === id) {
-            _setCurrentTile(null);
-        }
-    }
-
     useEffect(() => {
         makeFakeBoard();
     }, []);
@@ -40,7 +32,7 @@ export default function GameContextProvider({ children }) {
     return (
         // eslint-disable-next-line react/jsx-no-constructed-context-values
         <GameContext.Provider value={{
-            errormessage, setErrorMessage, currentBoard, setCurrentTile, currentTile
+            errormessage, setErrorMessage, currentBoard, _setCurrentTile, currentTile
         }}
         >
             {children}

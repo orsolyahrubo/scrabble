@@ -5,7 +5,15 @@ import { GameContext } from '../contexts/GameContext';
 
 export default function ScrabbleHand({ arrOfPlayersCurrentLetters }) {
 
-    const { setCurrentTile, currentTile } = useContext(GameContext);
+    const { _setCurrentTile, currentTile } = useContext(GameContext);
+
+    async function setCurrentTile(value, score, id) {
+        if (!currentTile || currentTile.id !== id) {
+            _setCurrentTile({ value, score, id });
+        } else if (currentTile.id === id) {
+            _setCurrentTile(null);
+        }
+    }
 
     return (
         <>
