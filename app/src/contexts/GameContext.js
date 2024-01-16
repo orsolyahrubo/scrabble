@@ -26,7 +26,7 @@ export default function GameContextProvider({ children }) {
     }
 
     async function setCurrentTile(value, score, id) {
-        if (!currentTile) {
+        if (!currentTile || currentTile.id !== id) {
             _setCurrentTile({ value, score, id });
         } else if (currentTile.id === id) {
             _setCurrentTile(null);
