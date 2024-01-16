@@ -15,7 +15,7 @@ import ScrabbleBoard from './components/ScrabbleBoard';
 
 function App() {
 
-  const { currentBoard } = useContext(GameContext);
+  const { currentBoard, currentTile } = useContext(GameContext);
 
   return (
     <BrowserRouter>
@@ -23,6 +23,7 @@ function App() {
         <div className="content-wrap">
           <Header />
           <ScrabbleTile value={'B'} score={2} />
+          {currentTile && `The current tile value is ${currentTile.value} and score is ${currentTile.score}`}
           <ScrabbleHand arrOfPlayersCurrentLetters={[{ value: 'C', score: 3 }, { value: 'D', score: 4 }, { value: 'C', score: 3 }, { value: 'D', score: 4 }, { value: 'C', score: 3 }, { value: 'D', score: 4 }, { value: 'C', score: 3 }, { value: 'D', score: 4 }]} />
           <ScrabbleBoard currentBoard={currentBoard} />
           <Routes>

@@ -26,6 +26,10 @@ export default function GameContextProvider({ children }) {
         });
     }
 
+    async function getCurrentTile(value, score) {
+        setCurrentTile({ value, score });
+    }
+
     useEffect(() => {
         makeFakeBoard();
     }, []);
@@ -33,7 +37,7 @@ export default function GameContextProvider({ children }) {
     return (
         // eslint-disable-next-line react/jsx-no-constructed-context-values
         <GameContext.Provider value={{
-            errormessage, setErrorMessage, currentBoard, setCurrentTile
+            errormessage, setErrorMessage, currentBoard, setCurrentTile, currentTile, getCurrentTile
         }}
         >
             {children}
