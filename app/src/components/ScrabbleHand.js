@@ -1,5 +1,4 @@
 import ScrabbleTile from './ScrabbleTile'
-import { v1 as uuidv1 } from 'uuid';
 import { useContext } from 'react';
 import { GameContext } from '../contexts/GameContext';
 
@@ -12,13 +11,13 @@ export default function ScrabbleHand({ arrOfPlayersCurrentLetters }) {
             <div className='container border border-warning p-0 text-center'>
                 {arrOfPlayersCurrentLetters.length > 0 ? (
                     <>
-                        {arrOfPlayersCurrentLetters.map((tile, index) => (
+                        {arrOfPlayersCurrentLetters.map((tile) => (
                             <ScrabbleTile
-                                id={uuidv1()}
-                                key={index}
+                                id={tile.id}
+                                key={tile.id}
                                 value={tile.value}
                                 score={tile.score}
-                                setCurrentTile={() => setCurrentTile(tile.value, tile.score)} />
+                                setCurrentTile={() => setCurrentTile(tile.value, tile.score, tile.id)} />
                         ))}
                     </>
                 ) : (

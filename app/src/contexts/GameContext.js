@@ -26,8 +26,8 @@ export default function GameContextProvider({ children }) {
         });
     }
 
-    async function setCurrentTile(value, score) {
-        _setCurrentTile({ value, score });
+    async function setCurrentTile(value, score, id) {
+        _setCurrentTile({ value, score, id });
     }
 
     useEffect(() => {
