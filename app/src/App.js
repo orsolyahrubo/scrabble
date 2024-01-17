@@ -1,8 +1,9 @@
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { GameContext } from './contexts/GameContext';
 import Header from './components/Header';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
@@ -11,25 +12,11 @@ import Footer from './components/Footer';
 import ScrabbleTile from './components/ScrabbleTile';
 import ScrabbleHand from './components/ScrabbleHand';
 import ScrabbleBoard from './components/ScrabbleBoard';
+import { playersTiles } from './consts';
 
 function App() {
-  const [currentBoard, setCurrentBoard] = useState(Array(15).fill(Array(15).fill(null)));
 
-  useEffect(() => {
-    const fakeTile = { value: 'A', score: 1 };
-    setCurrentBoard(currentBoard => {
-      const newBoard = currentBoard.map((row, rowIndex) => {
-        return row.map((element, columnIndex) => {
-          if (rowIndex === 3 && columnIndex === 2) {
-            return fakeTile;
-          }
-          return element;
-        });
-      }
-      );
-      return newBoard;
-    });
-  }, []);
+  const { currentBoard, currentTile } = useContext(GameContext);
 
   return (
     <BrowserRouter>
@@ -37,7 +24,8 @@ function App() {
         <div className="content-wrap">
           <Header />
           <ScrabbleTile value={'B'} score={2} />
-          <ScrabbleHand arrOfPlayersCurrentLetters={[{ value: 'C', score: 3 }, { value: 'D', score: 4 }, { value: 'C', score: 3 }, { value: 'D', score: 4 }, { value: 'C', score: 3 }, { value: 'D', score: 4 }, { value: 'C', score: 3 }, { value: 'D', score: 4 }]} />
+          {currentTile && `The current tile value is ${currentTile.value} and score is ${currentTile.score} id is ${currentTile.id}`}
+          <ScrabbleHand tiles={playersTiles} />
           <ScrabbleBoard currentBoard={currentBoard} />
           <Routes>
             <Route path="*" element={<NotFound />} />

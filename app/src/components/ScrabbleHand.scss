@@ -1,0 +1,6 @@
+.selected{
+    background-color: coral;
+    &:hover{
+        background-color: rgb(209, 73, 23);
+    }
+}

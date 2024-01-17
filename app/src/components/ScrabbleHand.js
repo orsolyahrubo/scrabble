@@ -1,14 +1,33 @@
 import ScrabbleTile from './ScrabbleTile'
+import './ScrabbleHand.scss'
+import { useContext } from 'react';
+import { GameContext } from '../contexts/GameContext';
 
-export default function ScrabbleHand({ arrOfPlayersCurrentLetters }) {
+export default function ScrabbleHand({ tiles }) {
+
+    const { setCurrentTile, currentTile } = useContext(GameContext);
+
+    async function onTileClick(value, score, id) {
+        if (!currentTile || currentTile.id !== id) {
+            setCurrentTile({ value, score, id });
+        } else if (currentTile.id === id) {
+            setCurrentTile(null);
+        }
+    }
 
     return (
         <>
             <div className='container border border-warning p-0 text-center'>
-                {arrOfPlayersCurrentLetters.length > 0 ? (
+                {tiles.length > 0 ? (
                     <>
-                        {arrOfPlayersCurrentLetters.map((tile, index) => (
-                            <ScrabbleTile key={index} value={tile.value} score={tile.score} />
+                        {tiles.map((tile) => (
+                            <ScrabbleTile
+                                id={tile.id}
+                                key={tile.id}
+                                extraClasses={currentTile?.id === tile.id ? 'selected' : ''}
+                                value={tile.value}
+                                score={tile.score}
+                                onClick={() => onTileClick(tile.value, tile.score, tile.id)} />
                         ))}
                     </>
                 ) : (
