@@ -5,13 +5,13 @@ import { GameContext } from '../contexts/GameContext';
 
 export default function ScrabbleHand({ tiles }) {
 
-    const { _setCurrentTile, currentTile } = useContext(GameContext);
+    const { setCurrentTile, currentTile } = useContext(GameContext);
 
-    async function setCurrentTile(value, score, id) {
+    async function onTileClick(value, score, id) {
         if (!currentTile || currentTile.id !== id) {
-            _setCurrentTile({ value, score, id });
+            setCurrentTile({ value, score, id });
         } else if (currentTile.id === id) {
-            _setCurrentTile(null);
+            setCurrentTile(null);
         }
     }
 
@@ -27,7 +27,7 @@ export default function ScrabbleHand({ tiles }) {
                                 extraClasses={currentTile?.id === tile.id ? 'selected' : ''}
                                 value={tile.value}
                                 score={tile.score}
-                                setCurrentTile={() => setCurrentTile(tile.value, tile.score, tile.id)} />
+                                onClick={() => onTileClick(tile.value, tile.score, tile.id)} />
                         ))}
                     </>
                 ) : (
