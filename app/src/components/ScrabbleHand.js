@@ -3,7 +3,7 @@ import './ScrabbleHand.scss'
 import { useContext } from 'react';
 import { GameContext } from '../contexts/GameContext';
 
-export default function ScrabbleHand({ arrOfPlayersCurrentLetters }) {
+export default function ScrabbleHand({ tiles }) {
 
     const { _setCurrentTile, currentTile } = useContext(GameContext);
 
@@ -18,13 +18,13 @@ export default function ScrabbleHand({ arrOfPlayersCurrentLetters }) {
     return (
         <>
             <div className='container border border-warning p-0 text-center'>
-                {arrOfPlayersCurrentLetters.length > 0 ? (
+                {tiles.length > 0 ? (
                     <>
-                        {arrOfPlayersCurrentLetters.map((tile) => (
+                        {tiles.map((tile) => (
                             <ScrabbleTile
                                 id={tile.id}
                                 key={tile.id}
-                                classNameForSelecting={currentTile?.id === tile.id ? 'selected' : ''}
+                                extraClasses={currentTile?.id === tile.id ? 'selected' : ''}
                                 value={tile.value}
                                 score={tile.score}
                                 setCurrentTile={() => setCurrentTile(tile.value, tile.score, tile.id)} />

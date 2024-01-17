@@ -25,7 +25,7 @@ function App() {
           <Header />
           <ScrabbleTile value={'B'} score={2} />
           {currentTile && `The current tile value is ${currentTile.value} and score is ${currentTile.score} id is ${currentTile.id}`}
-          <ScrabbleHand arrOfPlayersCurrentLetters={playersTiles} />
+          <ScrabbleHand tiles={playersTiles} />
           <ScrabbleBoard currentBoard={currentBoard} />
           <Routes>
             <Route path="*" element={<NotFound />} />
