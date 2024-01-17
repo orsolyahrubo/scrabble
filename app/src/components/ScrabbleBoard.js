@@ -12,7 +12,6 @@ export default function ScrabbleBoard({ currentBoard }) {
     async function onTileClick(value, score, id, rowIndex, columnIndex) {
         if (!value && !score && !id && currentTile) {
             addToCurrentMove({ x: rowIndex, y: columnIndex, tile: currentTile });
-            setCurrentTile(null);
             setCurrentHand(currentHand.filter(tile => tile.id !== currentTile.id));
             const newBoard = currentBoard.map((row, index) => {
                 return row.map((element, index2) => {
@@ -24,11 +23,24 @@ export default function ScrabbleBoard({ currentBoard }) {
             }
             )
             setCurrentBoard(newBoard);
+            setCurrentTile(null);
+        }
+        if (value && score && id && !currentTile) {
+            if (currentMove.some(tile => tile.x === rowIndex && tile.y === columnIndex)) {
+                setCurrentHand([...currentHand, { value, score, id }]);
+                const newBoard = currentBoard.map((row, index) => {
+                    return row.map((element, index2) => {
+                        if (index === rowIndex && index2 === columnIndex) {
+                            return null;
+                        }
+                        return element;
+                    });
+                }
+                )
+                setCurrentBoard(newBoard);
+            }
         }
     }
-    console.log('currentTile is', currentTile);
-    console.log('currentMove is', currentMove);
-    console.log('currentHand is', currentHand);
 
     return (
         <div className='board container-xl border d-flex flex-wrap text-center'>
@@ -40,7 +52,8 @@ export default function ScrabbleBoard({ currentBoard }) {
                         value={element?.value}
                         score={element?.score}
                         onClick={() => onTileClick(element?.value, element?.score, element?.id, rowIndex, columnIndex)}
-                        extraClasses={currentMove.some(tile => tile.x === rowIndex && tile.y === columnIndex) ? 'stillInHand' : ''}
+                        extraClasses={
+                            currentMove.some(tile => tile.x === rowIndex && tile.y === columnIndex) ? 'stillInHand' : ''}
                     />
                 ))
             ))}
