@@ -4,6 +4,7 @@ import 'bootstrap/dist/js/bootstrap';
 import { useContext } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { GameContext } from './contexts/GameContext';
+import { HandContext } from './contexts/HandContext';
 import Header from './components/Header';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
@@ -12,11 +13,11 @@ import Footer from './components/Footer';
 import ScrabbleTile from './components/ScrabbleTile';
 import ScrabbleHand from './components/ScrabbleHand';
 import ScrabbleBoard from './components/ScrabbleBoard';
-import { playersTiles } from './consts';
 
 function App() {
 
   const { currentBoard, currentTile } = useContext(GameContext);
+  const {currentHand} = useContext(HandContext);
 
   return (
     <BrowserRouter>
@@ -25,7 +26,7 @@ function App() {
           <Header />
           <ScrabbleTile value={'B'} score={2} />
           {currentTile && `The current tile value is ${currentTile.value} and score is ${currentTile.score} id is ${currentTile.id}`}
-          <ScrabbleHand tiles={playersTiles} />
+          <ScrabbleHand tiles={currentHand} />
           <ScrabbleBoard currentBoard={currentBoard} />
           <Routes>
             <Route path="*" element={<NotFound />} />
