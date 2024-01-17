@@ -17,7 +17,7 @@ import ScrabbleBoard from './components/ScrabbleBoard';
 function App() {
 
   const { currentBoard, currentTile } = useContext(GameContext);
-  const {currentHand} = useContext(HandContext);
+  const { currentHand } = useContext(HandContext);
 
   return (
     <BrowserRouter>
