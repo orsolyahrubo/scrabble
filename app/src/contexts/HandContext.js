@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState } from 'react';
 import { playersTiles } from '../consts';
 
 export const HandContext = createContext();
