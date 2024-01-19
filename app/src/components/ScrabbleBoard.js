@@ -3,6 +3,7 @@ import ScrabbleTile from './ScrabbleTile'
 import { useContext } from 'react';
 import { GameContext } from '../contexts/GameContext';
 import { HandContext } from '../contexts/HandContext';
+import { currentBoardMapper } from '../functions';
 
 export default function ScrabbleBoard({ currentBoard }) {
 
@@ -13,30 +14,14 @@ export default function ScrabbleBoard({ currentBoard }) {
         if (!value && !score && !id && currentTile) {
             addToCurrentMove({ x: rowIndex, y: columnIndex, tile: currentTile });
             setCurrentHand(currentHand.filter(tile => tile.id !== currentTile.id));
-            const newBoard = currentBoard.map((row, index) => {
-                return row.map((element, index2) => {
-                    if (index === rowIndex && index2 === columnIndex) {
-                        return currentTile;
-                    }
-                    return element;
-                });
-            }
-            )
+            const newBoard = await currentBoardMapper(currentBoard, rowIndex, columnIndex, currentTile);
             setCurrentBoard(newBoard);
             setCurrentTile(null);
         }
         if (value && score && id && !currentTile) {
             if (currentMove.some(tile => tile.x === rowIndex && tile.y === columnIndex)) {
                 setCurrentHand([...currentHand, { value, score, id }]);
-                const newBoard = currentBoard.map((row, index) => {
-                    return row.map((element, index2) => {
-                        if (index === rowIndex && index2 === columnIndex) {
-                            return null;
-                        }
-                        return element;
-                    });
-                }
-                )
+                const newBoard = await currentBoardMapper(currentBoard, rowIndex, columnIndex, null);
                 setCurrentBoard(newBoard);
             }
         }
