@@ -12,11 +12,10 @@ import Footer from './components/Footer';
 import ScrabbleTile from './components/ScrabbleTile';
 import ScrabbleHand from './components/ScrabbleHand';
 import ScrabbleBoard from './components/ScrabbleBoard';
-import { playersTiles } from './consts';
 
 function App() {
 
-  const { currentBoard, currentTile } = useContext(GameContext);
+  const { currentTile } = useContext(GameContext);
 
   return (
     <BrowserRouter>
@@ -25,8 +24,8 @@ function App() {
           <Header />
           <ScrabbleTile value={'B'} score={2} />
           {currentTile && `The current tile value is ${currentTile.value} and score is ${currentTile.score} id is ${currentTile.id}`}
-          <ScrabbleHand tiles={playersTiles} />
-          <ScrabbleBoard currentBoard={currentBoard} />
+          <ScrabbleHand />
+          <ScrabbleBoard />
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Home />} />

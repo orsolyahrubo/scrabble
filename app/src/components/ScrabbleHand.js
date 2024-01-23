@@ -3,9 +3,9 @@ import './ScrabbleHand.scss'
 import { useContext } from 'react';
 import { GameContext } from '../contexts/GameContext';
 
-export default function ScrabbleHand({ tiles }) {
+export default function ScrabbleHand() {
 
-    const { setCurrentTile, currentTile } = useContext(GameContext);
+    const { currentTile, currentHand, setCurrentTile } = useContext(GameContext);
 
     async function onTileClick(value, score, id) {
         if (!currentTile || currentTile.id !== id) {
@@ -18,9 +18,9 @@ export default function ScrabbleHand({ tiles }) {
     return (
         <>
             <div className='container border border-warning p-0 text-center'>
-                {tiles.length > 0 ? (
+                {currentHand.length > 0 ? (
                     <>
-                        {tiles.map((tile) => (
+                        {currentHand.map((tile) => (
                             <ScrabbleTile
                                 id={tile.id}
                                 key={tile.id}
