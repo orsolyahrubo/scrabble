@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
+import { playersTiles } from '../consts';
 
 export const GameContext = createContext();
 
@@ -9,6 +10,8 @@ export default function GameContextProvider({ children }) {
     const [currentPlayer, setCurrentPlayer] = useState(null);
     const [currentTile, _setCurrentTile] = useState(null);
     const [currentMove, _setCurrentMove] = useState([]);
+    const [currentHand, _setCurrentHand] = useState(playersTiles);
+
 
     async function makeFakeBoard() {
         const fakeTile = { value: 'A', score: 1, id: 'randomId12345678' };
@@ -23,10 +26,6 @@ export default function GameContextProvider({ children }) {
             });
             return newBoard;
         });
-    }
-
-    async function getCurrentBoard() {
-        return currentBoard;
     }
 
     async function setCurrentBoard(board) {
@@ -45,6 +44,10 @@ export default function GameContextProvider({ children }) {
         _setCurrentMove([...currentMove, tile]);
     }
 
+    async function setCurrentHand(tiles) {
+        _setCurrentHand(tiles);
+    }
+
     useEffect(() => {
         makeFakeBoard();
     }, []);
@@ -52,7 +55,17 @@ export default function GameContextProvider({ children }) {
     return (
         // eslint-disable-next-line react/jsx-no-constructed-context-values
         <GameContext.Provider value={{
-            errormessage, setErrorMessage, currentBoard, setCurrentTile, currentTile, setCurrentMove, currentMove, addToCurrentMove, setCurrentBoard, getCurrentBoard
+            errormessage,
+            setErrorMessage,
+            currentTile,
+            setCurrentTile,
+            currentMove,
+            setCurrentMove,
+            addToCurrentMove,
+            currentBoard,
+            setCurrentBoard,
+            currentHand,
+            setCurrentHand,
         }}
         >
             {children}

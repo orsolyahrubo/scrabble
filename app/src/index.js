@@ -4,15 +4,12 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GameContextProvider from './contexts/GameContext';
-import HandContextProvider from './contexts/HandContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <GameContextProvider>
-      <HandContextProvider>
-        <App />
-      </HandContextProvider>
+      <App />
     </GameContextProvider>
   </React.StrictMode>
 );
