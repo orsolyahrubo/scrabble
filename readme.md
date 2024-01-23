@@ -7,7 +7,7 @@ The vision of scrabble is to create the well-known board game in app format. Pla
 * React
 * Bootstrap 5
 * Node.js
-* Plans for backend: MongoDB, Express, Swagger
+* Plans for backend: Express, Typescript, MongoDB,Swagger
 * Plans for testing: Jest
 * Plans for easier deployment: Docker
 * Yarn
