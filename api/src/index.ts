@@ -1,6 +1,6 @@
-import logger from './logger.js';
-import config from './config.js';
-import app from './app.js';
+import logger from './logger';
+import config from './config';
+import app from './app';
 
 const PORT = config.port || 8081;
 
