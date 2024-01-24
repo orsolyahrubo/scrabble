@@ -121,7 +121,7 @@ export default function RegisterForm() {
             } catch (err) {
                 setWasValidated(false);
                 setFormAlertType('danger');
-                setFromAlertText('Sikertelen regisztráció.');
+                setFromAlertText('Registration failed. Please try again later.');
             }
         }
     }
