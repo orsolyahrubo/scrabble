@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import ScrabbleTile from './components/ScrabbleTile';
 import ScrabbleHand from './components/ScrabbleHand';
 import ScrabbleBoard from './components/ScrabbleBoard';
+import RegisterForm from './pages/RegisterForm';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
           <ScrabbleHand />
           <ScrabbleBoard />
           <Routes>
+            <Route path="/register" element={<RegisterForm />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Home />} />
             {/* <Route path="/register" element={<RegisterForm />} /> */}
