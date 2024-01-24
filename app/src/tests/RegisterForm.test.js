@@ -1,15 +1,15 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import RegisterForm from '../pages/RegisterForm';
 import { BrowserRouter } from 'react-router-dom';
-import GameContextProvider from '../contexts/GameContext';
+import { GameContext } from '../contexts/GameContext';
 
 const MockRegisterForm = () => {
     return (
-        <GameContextProvider>
+        <GameContext.Provider>
             <BrowserRouter>
                 <RegisterForm />
             </BrowserRouter>
-        </GameContextProvider>
+        </GameContext.Provider>
     )
 }
 
