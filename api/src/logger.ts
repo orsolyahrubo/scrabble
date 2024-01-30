@@ -1,4 +1,5 @@
 import { format, createLogger, transports } from 'winston';
+import { StreamOptions } from 'morgan'
 
 const options = {
   file: {
@@ -37,11 +38,6 @@ const logger = createLogger({
 });
 
 /* istanbul ignore next */
-logger.stream = {
-  write: (message) => logger.info(message),
-};
-
-/* istanbul ignore next */
 if (process.env.NODE_ENV !== 'production') {
   logger.add(
     Object.assign(new transports.Console(options.console), {
@@ -49,5 +45,9 @@ if (process.env.NODE_ENV !== 'production') {
     }),
   );
 }
+
+export const stream = {
+  write: (message) => logger.info(message),
+} as StreamOptions;
 
 export default logger;
