@@ -34,7 +34,7 @@ describe('ScrabbleHand', () => {
         expect(screen.queryByText('Y', { exact: true })).not.toBeInTheDocument();
     }
     )
-    it('Should call currentTile when a tile is clicked', () => {
+    it('If a tile is clicked and there is no currentTile than setCurrentTile function will be called with the clicked tile', () => {
         const currentHand = [
             { value: 'C', score: 3, id: 'randomID1' },
             { value: 'D', score: 4, id: 'randomID2' }
@@ -53,15 +53,13 @@ describe('ScrabbleHand', () => {
         expect(setCurrentTile).toHaveBeenCalledWith({ value: 'C', score: 3, id: 'randomID1' });
     }
     )
-    it('Should we click on a tile it should be set to currentTile', () => {
+    it('If a tile is clicked and there is a currentTile but with different id than tiles id than setCurrentTile function will be called with tile', () => {
         const currentHand = [
             { value: 'C', score: 3, id: 'randomID1' },
-            { value: 'D', score: 4, id: 'randomID2' }
+            { value: 'E', score: 5, id: 'randomID2' }
         ];
-        const currentTile = null;
-        const tileToSet = { value: 'C', score: 3, id: 'randomID1' };
-        // need to mock setCurrentTile to return tileToSet
-        const setCurrentTile = jest.fn(() => tileToSet);
+        const currentTile = { value: 'C', score: 3, id: 'randomID1' };
+        const setCurrentTile = jest.fn()
         render(
             <GameContext.Provider value={{ currentHand, currentTile, setCurrentTile }}>
                 <BrowserRouter>
@@ -69,12 +67,28 @@ describe('ScrabbleHand', () => {
                 </BrowserRouter>
             </GameContext.Provider>
         )
-        console.log('tileToSet', tileToSet);
-        const foundThatTile = screen.queryByDisplayValue(/3/i);
-        console.log('foundThatTile', foundThatTile);
+        fireEvent.click(screen.getByText(/E/i));
+        expect(setCurrentTile).toHaveBeenCalledTimes(1);
+        expect(setCurrentTile).toHaveBeenCalledWith({ value: 'E', score: 5, id: 'randomID2' });
+    }
+    )
+    it('If a tile is clicked and there is a currentTile with the same id than setCurrentTile function will be called with null', () => {
+        const currentHand = [
+            { value: 'C', score: 3, id: 'randomID1' },
+            { value: 'E', score: 5, id: 'randomID2' }
+        ];
+        const currentTile = { value: 'C', score: 3, id: 'randomID1' };
+        const setCurrentTile = jest.fn()
+        render(
+            <GameContext.Provider value={{ currentHand, currentTile, setCurrentTile }}>
+                <BrowserRouter>
+                    <ScrabbleHand />
+                </BrowserRouter>
+            </GameContext.Provider>
+        )
         fireEvent.click(screen.getByText(/C/i));
-        console.log('currentTile', currentTile);
-        waitFor(() => expect(currentTile).toEqual(tileToSet));
+        expect(setCurrentTile).toHaveBeenCalledTimes(1);
+        expect(setCurrentTile).toHaveBeenCalledWith(null);
     }
     )
 });
