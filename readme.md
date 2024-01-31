@@ -7,11 +7,15 @@ The vision of scrabble is to create the well-known board game in app format. Pla
 * React
 * Bootstrap 5
 * Node.js
-* Plans for backend: Express, Typescript, MongoDB, Swagger
-* Plans for testing: Jest
-* Plans for easier deployment: Docker
+* Express
+* Typescript
+* MongoDB
+* Swagger
+* Jest
+* Plan for easier deployment: Docker
 * Yarn
 
 ## Running the app
-* For now you can only run frontend. Create a `.env.local` file with your settings, use `.env.example` as an example. 
-* Future plans: Same structure for backend, using Docker, using seeder for creating data to work with at beginning.
+* Frontend side: create a `.env.local` file with your settings, use `.env.example` as an example. In the app folder use `yarn install` command then use `yarn start`
+* Backend side: create a `.env` file with your settings, use `.env.example` as an example. In the api folder use `yarn install` command then use `yarn start`
+* Future plans: I'm going to use Docker, and probably will make a seeder for creating data to work with at beginning.
