@@ -1,47 +1,45 @@
 import bcrypt from "bcrypt";
 import validator from "validator";
-import UserModel from '../user/user.model';
-// import { InferSchemaType } from 'mongoose';
+import { UserModel } from '../user/user.model';
 
-// type User = InferSchemaType<typeof userSchema>;
+let err: any;
 
 export const registerService = {
     async register(name: string, email: string, password: string) {
         console.log('registerService.register', name, email, password);
         if (!name && !email && !password) {
-            const error = new Error('Name, email and password are required.');
-            // error.status = 400;
-            throw error;
+            err = new Error('Name, email, and password are required.');
+            err.status = 400;
+            throw err;
         } else if (!name) {
-            const error = new Error('Name is required.');
-            // error.status = 400;
-            throw error;
+            err = new Error('Name is required.');
+            err.status = 400;
+            throw err;
         } else if (!email) {
-            const error = new Error('Email is required.');
-            // error.status = 400;
-            throw error;
+            err = new Error('Email is required.');
+            err.status = 400;
+            throw err;
         } else if (!password) {
-            const error = new Error('Password is required.');
-            // error.status = 400;
-            throw error;
+            err = new Error('Password is required.');
+            err.status = 400;
+            throw err;
         } else if (password.length < 8) {
-            const error = new Error('Password must be at least 8 characters.');
-            // error.status = 400;
-            throw error;
+            err = new Error('Password must be at least 8 characters.');
+            err.status = 400;
+            throw err;
         } else if (!validator.isEmail(email)) {
-            const error = new Error('Not a valid email format.');
-            // error.status = 400;
-            throw error;
+            err = new Error('Email is invalid.');
+            err.status = 400;
+            throw err;
         } else {
             console.log('registerService.register email last error', email);
             const isEmailTaken = (await UserModel.findOne({ email })) !== null;
             if (isEmailTaken) {
-                const error = new Error('Email is already taken.');
-                //   error.status = 400;
-                throw error;
+                err = new Error('Email is already taken.');
+                err.status = 400;
+                throw err;
             }
         }
-
         const hashedPassword = await bcrypt.hash(password, 10);
         const result = await UserModel.create({
             name, email, password: hashedPassword
