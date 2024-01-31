@@ -44,8 +44,6 @@ export const registerService = {
             name, email, password: hashedPassword
         });
 
-        console.log('registerService.register result', result)
-
         return { id: result.id, name: result.name, email: result.email };
     },
 };
