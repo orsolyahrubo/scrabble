@@ -1,12 +1,12 @@
 import bcrypt from "bcrypt";
 import validator from "validator";
-import { UserModel } from '../user/user.model';
+import { IUser, UserModel } from '../user/user.model';
 
 let err: any;
 
 export const registerService = {
-    async register(name: string, email: string, password: string) {
-        console.log('registerService.register', name, email, password);
+    async register(user: IUser) {
+        const { name, email, password } = user;
         if (!name && !email && !password) {
             err = new Error('Name, email, and password are required.');
             err.status = 400;
@@ -32,7 +32,6 @@ export const registerService = {
             err.status = 400;
             throw err;
         } else {
-            console.log('registerService.register email last error', email);
             const isEmailTaken = (await UserModel.findOne({ email })) !== null;
             if (isEmailTaken) {
                 err = new Error('Email is already taken.');
