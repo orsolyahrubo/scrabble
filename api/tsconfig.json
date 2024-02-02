@@ -9,6 +9,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*.ts",     "types/custom-matcher.d.ts"],
+  "include": ["src/**/*.ts", "types/custom-matcher.d.ts"],
   "exclude": ["node_modules"]
 }
