@@ -42,7 +42,7 @@ components:
           example: 'johndoe@test.com'
         id:
           type: string
-          example: '1'
+          example: 'FNEOFNOSMee12ii3i'
     registration-form:
       type: object
       properties:

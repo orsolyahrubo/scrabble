@@ -9,7 +9,6 @@ const config = {
     uri: process.env.DB_TEST_URI,
   },
 };
-
 export const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
@@ -19,7 +18,7 @@ export const swaggerOptions = {
     },
     servers: [{ url: `http://localhost:${config.port}` }],
   },
-  apis: ['path/to/api-docs.yaml'],
+  apis: ['./src/**/*.yaml'],
 };
 
 export default config;
