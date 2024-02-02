@@ -1,6 +1,6 @@
 import logger from '../logger';
 
-export default (err: any, req: any, res: any, next: any) => {
+export default (err: any, req: any, res: any) => {
     logger.error(
         `${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method
         } - ${req.ip}`,
