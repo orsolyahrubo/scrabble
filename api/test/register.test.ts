@@ -44,7 +44,7 @@ test('POST /api/register with valid data should respond with 200', (done) => {
     });
 });
 
-test('POST /api/register with invalid data should respond with 400', (done) => {
+test('POST /api/register with invalid data should respond with 422', (done) => {
   const userToRegister = {
     name: 'John Doe',
     password: 'password123',
@@ -55,7 +55,7 @@ test('POST /api/register with invalid data should respond with 400', (done) => {
     .send(userToRegister)
     .set('Accept', 'application/json')
     .expect('Content-Type', /json/)
-    .expect(400)
+    .expect(422)
     .end((err) => {
       if (err) return done(err);
       return done();

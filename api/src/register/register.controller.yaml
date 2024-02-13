@@ -26,9 +26,11 @@ paths:
               schema:
                 type: object
                 properties:
-                  error:
-                    type: string
-                    example: 'Name, Email, and Password required'
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    example: ['name is a required field', 'email is a required field', 'password is a required field']
 components:
   schemas:
     registered-user:
