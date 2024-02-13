@@ -13,12 +13,8 @@ export const registerController = {
         let result;
         try {
             result = await registerService.register(user);
-            // } catch (err) {
-            //     return next(err);
-            // }
-        } catch (e) {
-            const error = e as ValidationError;
-            return res.status(422).json({ errors: error.errors });
+        } catch (err) {
+            return next(err);
         }
         return res.status(200).json(result);
     },

@@ -1,13 +1,11 @@
 import bcrypt from "bcrypt";
 import { IUser, UserModel } from '../user/user.model';
-import { registerUserSchema } from './register.schema';
 
 let err: any;
 
 export const registerService = {
     async register(user: IUser) {
-        const data = registerUserSchema.validateSync(user, { abortEarly: false, stripUnknown: true });
-        const { name, email, password } = data;
+        const { name, email, password } = user;
         const isEmailTaken = (await UserModel.findOne({
             email
         })) !== null;
