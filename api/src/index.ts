@@ -1,6 +1,7 @@
 import logger from './logger';
 import config from './config';
 import app from './app';
+import './db';
 
 const PORT = config.port || 8081;
 
