@@ -5,5 +5,9 @@ const config: Config.InitialOptions = {
   testEnvironment: 'node',
   testPathIgnorePatterns: [".d.ts", ".js"],
   verbose: true,
+  testTimeout: 15000,
+  setupFiles: [
+    "dotenv/config"
+  ]
 }
 export default config

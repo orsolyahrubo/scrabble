@@ -1,7 +1,6 @@
 import { registerService } from './register.service';
 import { Request, Response } from 'express';
 import { IUser } from '../user/user.model';
-import { ValidationError } from 'yup';
 
 export const registerController = {
     async post(req: Request, res: Response, next: any) {
