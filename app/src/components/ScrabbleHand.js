@@ -27,7 +27,8 @@ export default function ScrabbleHand() {
                                 extraClasses={currentTile?.id === tile.id ? 'selected' : ''}
                                 value={tile.value}
                                 score={tile.score}
-                                onClick={() => onTileClick(tile.value, tile.score, tile.id)} />
+                                onClick={() => onTileClick(tile.value, tile.score, tile.id)}
+                            />
                         ))}
                     </>
                 ) : (

@@ -1,20 +1,24 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+    faCircleUser,
     faEnvelope,
     faLock,
 } from '@fortawesome/free-solid-svg-icons';
 import validator from 'validator';
 import Form from '../components/Form';
 import InputRegular from '../components/InputRegular';
+import InputCheckBox from '../components/InputCheckbox';
 
-export default function LoginForm() {
-
+export default function RegisterForm() {
+    const user = <FontAwesomeIcon icon={faCircleUser} />;
     const envelope = <FontAwesomeIcon icon={faEnvelope} />;
     const lock = <FontAwesomeIcon icon={faLock} />;
 
     const initalValues = {
+        name: '',
         email: '',
         password: '',
+        auth: false,
     };
 
     function isNotEmpty(value) {
@@ -25,7 +29,21 @@ export default function LoginForm() {
         return validator.isEmail(value);
     }
 
+    function atLeastEightChars(value) {
+        return value.length >= 8;
+    }
+
+    function isItChecked(value) {
+        return value === true;
+    }
+
     const validators = {
+        name: [
+            {
+                fn: isNotEmpty,
+                errorMessage: 'Cannot be empty.',
+            },
+        ],
         email: [
             {
                 fn: isNotEmpty,
@@ -40,6 +58,16 @@ export default function LoginForm() {
             {
                 fn: isNotEmpty,
                 errorMessage: 'Cannot be empty.',
+            },
+            {
+                fn: atLeastEightChars,
+                errorMessage: 'Must be at least 8 characters long.',
+            },
+        ],
+        auth: [
+            {
+                fn: isItChecked,
+                errorMessage: 'Must be checked.',
             },
         ],
     };
@@ -58,6 +86,7 @@ export default function LoginForm() {
         event.preventDefault();
 
         const userData = {
+            name: formData.name,
             email: formData.email,
             password: formData.password,
         };
@@ -68,7 +97,7 @@ export default function LoginForm() {
             let response;
 
             try {
-                response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/login`, {
+                response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/register`, {
                     method: 'POST',
                     body: JSON.stringify(userData),
                     headers: {
@@ -83,11 +112,7 @@ export default function LoginForm() {
                     setErrorMessages({});
                     setWasValidated(false);
 
-                    const { token } = data;
-                    if (token) {
-                        // logInUserByToken(token);
-                        navigate('/');
-                    }
+                    navigate('/login');
                 } else {
                     setWasValidated(false);
                     setFormAlertType('danger');
@@ -96,16 +121,40 @@ export default function LoginForm() {
             } catch (err) {
                 setWasValidated(false);
                 setFormAlertType('danger');
-                setFromAlertText('Login failed. Please try again later.');
+                setFromAlertText('Registration failed. Please try again later.');
             }
         }
     }
 
     return (
         <main className="container">
-            <Form title="Login" handleSubmit={handleSubmit} initalValues={initalValues} validators={validators}>
-                {(handleOnChange, getValidationClassName, errorMessages, formData) => (
+            <Form
+                title="Registration"
+                handleSubmit={handleSubmit}
+                initalValues={initalValues}
+                validators={validators}
+            >
+
+                {(
+                    handleOnChange,
+                    getValidationClassName,
+                    errorMessages,
+                    formData,
+                    handleCheckboxChange,
+                ) => (
                     <>
+                        <InputRegular
+                            type="text"
+                            name="name"
+                            className="input-field"
+                            handleOnChange={handleOnChange}
+                            getValidationClassName={getValidationClassName}
+                            errorMessages={errorMessages.name}
+                            value={formData.name}
+                            placeholder="Name*"
+                            icon={user}
+                        />
+
                         <InputRegular
                             type="email"
                             name="email"
@@ -117,6 +166,7 @@ export default function LoginForm() {
                             placeholder="Email*"
                             icon={envelope}
                         />
+
                         <InputRegular
                             type="password"
                             name="password"
@@ -128,6 +178,20 @@ export default function LoginForm() {
                             placeholder="Password*"
                             icon={lock}
                         />
+
+                        <div id="authInput">
+                            <InputCheckBox
+                                label="I accept the "
+                                name="auth"
+                                checked={formData.auth}
+                                handleOnChange={handleCheckboxChange}
+                                getValidationClassName={getValidationClassName}
+                                errorMessages={errorMessages.auth}
+                                id="authCheckbox"
+                                href="/terms"
+                                hrefText="Terms and Conditions"
+                            />
+                        </div>
                     </>
                 )}
             </Form>

@@ -1,0 +1,81 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+
+    h1 {
+        text-align: center;
+        color: rgb(77, 56, 37);
+        margin-top: 5px;
+    }
+}
+
+form {
+    padding: 20px;
+    background-color: rgb(238, 227, 214);
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px gray;
+    width: 450px;
+    height: fit-content;
+    margin-top: 25px;
+}
+
+.input-block {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+i {
+    margin: 5px;
+    padding: 2px;
+    align-self: center;
+}
+
+.input-field {
+    width: 350px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 0.5px solid black;
+    border-radius: 0;
+    background-image: none;
+}
+
+#authInput {
+    text-align: center;
+    color: rgb(77, 56, 37);
+}
+
+#submit-btn {
+    background-color: rgb(238, 227, 214);
+    border-color: rgb(77, 56, 37);
+    color: rgb(77, 56, 37);
+    text-align: center;
+    width: auto;
+    margin: 20px 0;
+
+    &:hover {
+        background-color: rgba(235, 113, 0, 0.2);
+        color: rgb(77, 56, 37);
+        text-align: center;
+    }
+}
+
+.invalid-feedback {
+    display: block;
+    padding-left: 20px;
+}
+
+textarea {
+    resize: none;
+}
+
+.react-datepicker-wrapper {
+    width: 0;
+}

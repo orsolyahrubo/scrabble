@@ -2,7 +2,8 @@ import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faHouse,
-    faUser
+    faUser,
+    faHandPointUp,
 } from '@fortawesome/free-solid-svg-icons';
 import './Header.scss';
 
@@ -10,6 +11,7 @@ export default function Header() {
 
     const loginIcon = <FontAwesomeIcon icon={faUser} />;
     const homeIcon = <FontAwesomeIcon icon={faHouse} />;
+    const register = <FontAwesomeIcon icon={faHandPointUp} />;
 
     return (
         <div className="container-lg">
@@ -42,14 +44,18 @@ export default function Header() {
                                 <li className="nav-item">
                                     <NavLink className="nav-link btn px-3" to="/">
                                         Home
-                                        {' '}
                                         <i>{homeIcon}</i>
+                                    </NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className="nav-link btn px-3" to="/register">
+                                        Registration
+                                        <i>{register}</i>
                                     </NavLink>
                                 </li>
                                 <li className="nav-item">
                                     <NavLink className="nav-link btn px-3" to="/login">
                                         Login
-                                        {' '}
                                         <i>{loginIcon}</i>
                                     </NavLink>
                                 </li>
