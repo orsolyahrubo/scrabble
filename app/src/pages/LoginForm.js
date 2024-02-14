@@ -83,11 +83,12 @@ export default function LoginForm() {
                     setErrorMessages({});
                     setWasValidated(false);
 
-                    const { token } = data;
-                    if (token) {
+                    // const { token } = data;
+                    // if (token) {
                         // logInUserByToken(token);
-                        navigate('/');
-                    }
+                    //     navigate('/');
+                    // }
+                    console.log('Login successful', data);
                 } else {
                     setWasValidated(false);
                     setFormAlertType('danger');
