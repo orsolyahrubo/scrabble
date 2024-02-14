@@ -289,7 +289,7 @@ describe('Form checks', () => {
 
             });
         })
-        it('Response.ok than my input fields are empty after button clicked', async () => {
+        it('Response.ok than I\'m being navigated to Login page', async () => {
 
             render(<MockRegisterForm />)
 
@@ -301,7 +301,7 @@ describe('Form checks', () => {
 
             fireEvent.change(nameInputElement, { target: { value: 'John' } })
             fireEvent.change(emailInputElement, { target: { value: 'test@test.com' } })
-            fireEvent.change(passwordInputElement, { target: { value: '*********' } })
+            fireEvent.change(passwordInputElement, { target: { value: 'abcd12345678' } })
             fireEvent.click(checkboxElement, { checked: true })
             fireEvent.click(buttonElement);
             await waitFor(() => {

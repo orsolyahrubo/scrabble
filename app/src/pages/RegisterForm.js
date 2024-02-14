@@ -33,6 +33,15 @@ export default function RegisterForm() {
         return value.length >= 8;
     }
 
+    function onlyLettersAndNumbers(value) {
+        const PASSWORD_REGEX = /^[a-zA-Z0-9]+$/;
+        return PASSWORD_REGEX.test(value);
+    }
+
+    function betweenTwoAndFiftyChars(value) {
+        return value.length >= 2 && value.length <= 50;
+    }
+
     function isItChecked(value) {
         return value === true;
     }
@@ -42,6 +51,10 @@ export default function RegisterForm() {
             {
                 fn: isNotEmpty,
                 errorMessage: 'Cannot be empty.',
+            },
+            {
+                fn: betweenTwoAndFiftyChars,
+                errorMessage: 'Must be between 2 and 50 characters long.',
             },
         ],
         email: [
@@ -62,6 +75,10 @@ export default function RegisterForm() {
             {
                 fn: atLeastEightChars,
                 errorMessage: 'Must be at least 8 characters long.',
+            },
+            {
+                fn: onlyLettersAndNumbers,
+                errorMessage: 'Must contain only letters and numbers.',
             },
         ],
         auth: [
