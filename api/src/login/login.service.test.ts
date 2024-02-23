@@ -1,6 +1,6 @@
-import { UserModel, IUser } from '../user/user.model';
+import { UserModel } from '../user/user.model';
 import { loginService } from './login.service';
-import { expect, test, beforeAll, } from '@jest/globals';
+import { expect, test } from '@jest/globals';
 import bcrypt from 'bcrypt';
 import config from '../config';
 
