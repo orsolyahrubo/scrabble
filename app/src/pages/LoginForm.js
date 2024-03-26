@@ -8,7 +8,6 @@ import Form from '../components/Form';
 import InputRegular from '../components/InputRegular';
 
 export default function LoginForm() {
-
     const envelope = <FontAwesomeIcon icon={faEnvelope} />;
     const lock = <FontAwesomeIcon icon={faLock} />;
 
@@ -82,13 +81,7 @@ export default function LoginForm() {
                     setFormData(initalValues);
                     setErrorMessages({});
                     setWasValidated(false);
-
-                    // const { token } = data;
-                    // if (token) {
-                        // logInUserByToken(token);
-                    //     navigate('/');
-                    // }
-                    console.log('Login successful', data);
+                    navigate('/');
                 } else {
                     setWasValidated(false);
                     setFormAlertType('danger');

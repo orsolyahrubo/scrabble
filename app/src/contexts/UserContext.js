@@ -17,7 +17,7 @@ export default function UserContextProvider({ children }) {
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
     <UserContext.Provider value={{
-      tokenInContext,
+      tokenInContext, setTokenInContext, getTokenFromLocalStorage
     }}
     >
       {children}
