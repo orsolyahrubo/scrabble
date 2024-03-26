@@ -12,7 +12,6 @@ const MockRegisterForm = () => {
         </GameContext.Provider>
     )
 }
-
 describe('Form checks', () => {
 
     describe('Heading', () => {
@@ -289,7 +288,7 @@ describe('Form checks', () => {
 
             });
         })
-        it('Response.ok than I\'m being navigated to Login page', async () => {
+        it('Response.ok than I\'m being navigated to Login page and all the input fields are empty again', async () => {
 
             render(<MockRegisterForm />)
 
