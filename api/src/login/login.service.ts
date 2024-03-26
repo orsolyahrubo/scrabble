@@ -11,7 +11,7 @@ export type LoginInputParams = {
 };
 
 export const loginService = {
-    async login(user: LoginInputParams) {
+    async login(user: LoginInputParams): Promise<{ token: string }> {
         const { email, password } = user;
         const result: { token: string } = { token: '' };
         const userFromDatabase = await UserModel.findOne({ email });
