@@ -8,7 +8,6 @@ test('Login with valid email and password combination should return a JWT token'
     const userToLogin = {
         email: 'johndoe5@test.com',
         password: '12345678',
-        name: ''
     };
     jest.replaceProperty(config, 'jwtSecret', 'superjwtsecret');
     jest.spyOn(UserModel, 'findOne').mockResolvedValue(
@@ -32,7 +31,6 @@ test('Login with invalid email and password combination should throw an error', 
     const userToLogin = {
         email: 'johndoe5@test.com',
         password: 'wrongpassword',
-        name: ''
     };
     jest.spyOn(UserModel, 'findOne').mockResolvedValue(null);
 

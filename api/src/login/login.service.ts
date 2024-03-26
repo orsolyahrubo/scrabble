@@ -1,14 +1,19 @@
 import bcrypt from "bcrypt";
-import { IUser, UserModel } from '../user/user.model';
+import { UserModel } from '../user/user.model';
 import jwt from 'jsonwebtoken';
 import config from '../config';
 
 let err: any;
 
+export type LoginInputParams = {
+    email: string;
+    password: string;
+};
+
 export const loginService = {
-    async login(user: IUser) {
+    async login(user: LoginInputParams) {
         const { email, password } = user;
-        const result: any = {};
+        const result: { token: string } = { token: '' };
         const userFromDatabase = await UserModel.findOne({ email });
         if (!userFromDatabase || !await bcrypt.compare(password, userFromDatabase.password)) {
             err = new Error('Email or password is incorrect.');
@@ -16,7 +21,10 @@ export const loginService = {
             throw err;
         } else {
             result.token = jwt.sign({
-                userId: user.id, name: user.name, email: user.email, isAdmin: user.isAdmin,
+                userId: userFromDatabase.id,
+                name: userFromDatabase.name,
+                email: userFromDatabase.email,
+                isAdmin: userFromDatabase.isAdmin
             }, config.jwtSecret!, { expiresIn: '1h' });
         }
         return result;

@@ -1,13 +1,11 @@
-import { loginService } from "./login.service";
+import { loginService, LoginInputParams } from "./login.service";
 import { Request, Response } from 'express';
-import { IUser } from '../user/user.model';
 
 export const loginController = {
     async post(req: Request, res: Response, next: any) {
-        const user: IUser = {
+        const user: LoginInputParams = {
             email: req.body.email,
             password: req.body.password,
-            name: ""
         };
         let result;
         try {
