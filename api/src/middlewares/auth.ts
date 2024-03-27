@@ -6,16 +6,16 @@ export const auth = async (req: any, res: any, next: any) => {
         const token = req.headers.authorization.split(' ')[1];
         console.log('az authban talalhato token', token);
         if (!token) {
-            res.status(403).send('You are not authorized.');
+            res.status(403).send('You need to be logged in to access this route.');
         }
-        const decodedToken = await jwt.verify(token, config.jwtSecret!);
+        const decodedToken = jwt.verify(token, config.jwtSecret!);
         req.headers = { ...req.headers, loggedInUserData: decodedToken };
         next();
     } catch (err: any) {
         err.status = 401;
         err.message = {
             status: 'error',
-            message: 'Invalid token',
+            message: 'You are not authorized to access this route.',
         };
         next(err);
     }
