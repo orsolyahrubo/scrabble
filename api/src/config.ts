@@ -8,6 +8,7 @@ const config = {
   testDb: {
     uri: process.env.DB_TEST_URI,
   },
+  jwtSecret: process.env.JWT_SECRET,
 };
 export const swaggerOptions = {
   definition: {
