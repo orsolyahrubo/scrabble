@@ -4,13 +4,16 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GameContextProvider from './contexts/GameContext';
+import UserContextProvider from './contexts/UserContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <GameContextProvider>
-      <App />
-    </GameContextProvider>
+    <UserContextProvider>
+      <GameContextProvider>
+        <App />
+      </GameContextProvider>
+    </UserContextProvider>
   </React.StrictMode>
 );
 
