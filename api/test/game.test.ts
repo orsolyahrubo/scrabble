@@ -12,6 +12,7 @@ const defaultSecretKey = config.jwtSecret;
 let idOfUser: Object;
 let result: any;
 let tokenOfUser: string;
+let idOfGame: Object;
 
 beforeAll(async () => {
     mongoose.set('strictQuery', true);
@@ -79,7 +80,8 @@ beforeAll(async () => {
             }
         ]
     }
-    await GameModel.create(exampleGame);
+    const gameInDatabase = await GameModel.create(exampleGame);
+    idOfGame = gameInDatabase._id;
 
     result = await request(app).post('/api/login').send({
         email: 'tester@tester.com',
@@ -121,7 +123,39 @@ test('GET /api/game should return 200 and an array of games of user if valid tok
         .set('Authorization', `Bearer ${tokenOfUser}`)
         .expect(200)
         .end((err, data) => {
-            console.log('data.body', data.body);
+            if (err) return done(err);
+            expect(data.body).toBeTruthy();
+            return done();
+        });
+});
+test('GET /api/game/:gameId should throw 403 if no token is provided', (done) => {
+    const invalidToken = '';
+    request(app)
+        .get(`/api/games/${idOfGame}`)
+        .set('Authorization', `${invalidToken}`)
+        .expect(403)
+        .end((err) => {
+            if (err) return done(err);
+            return done();
+        });
+});
+test('GET /api/game/:gameId should throw 401 if invalid token is provided', (done) => {
+    const invalidToken = 'invalidtoken';
+    request(app)
+        .get(`/api/games/${idOfGame}`)
+        .set('Authorization', `Bearer ${invalidToken}`)
+        .expect(401)
+        .end((err) => {
+            if (err) return done(err);
+            return done();
+        })
+});
+test('GET /api/game/:gameId should return 200 and a specific game of user if valid token and gameId is provided', (done) => {
+    request(app)
+        .get(`/api/games/${idOfGame}`)
+        .set('Authorization', `Bearer ${tokenOfUser}`)
+        .expect(200)
+        .end((err, data) => {
             if (err) return done(err);
             expect(data.body).toBeTruthy();
             return done();
