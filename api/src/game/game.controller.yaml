@@ -29,6 +29,43 @@ paths:
                       message:
                         type: 'string'
                         example: 'You are not authorized to access this route.'
+  /api/games/:id:
+    get:
+      summary: 'Get a specific game by id that belongs to a user'
+      tags:
+        - api
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: 'Game id'
+      responses:
+        200:
+          description: 'Object with key "game" that has an object as value, which contains the game.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/games'
+        401:
+          description: 'Response error object'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      status: 
+                        type: 'string'
+                        example: 'error'
+                      message:
+                        type: 'string'
+                        example: 'You are not authorized to access this route.'
 components:
   schemas:
     games:
