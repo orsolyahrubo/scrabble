@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import { IUser, UserModel } from '../user/user.model';
+import { createGame } from "../game/game.model";
 
 let err: any;
 
@@ -18,6 +19,7 @@ export const registerService = {
         const result = await UserModel.create({
             name, email, password: hashedPassword
         });
+        createGame();
         return { id: result.id, name: result.name, email: result.email };
     }
 };

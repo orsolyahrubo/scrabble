@@ -1,0 +1,214 @@
+paths:
+  /api/games:
+    get:
+      summary: 'Get all games of a user'
+      tags:
+        - api
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: 'Object with key "games" that has an array as value, which contains an object for each game.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/games'
+        401:
+          description: 'Response error object'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      status: 
+                        type: 'string'
+                        example: 'error'
+                      message:
+                        type: 'string'
+                        example: 'You are not authorized to access this route.'
+  /api/games/:id:
+    get:
+      summary: 'Get a specific game by id that belongs to a user'
+      tags:
+        - api
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: 'Game id'
+      responses:
+        200:
+          description: 'Object with key "game" that has an object as value, which contains the game.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/games'
+        401:
+          description: 'Response error object'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      status: 
+                        type: 'string'
+                        example: 'error'
+                      message:
+                        type: 'string'
+                        example: 'You are not authorized to access this route.'
+components:
+  schemas:
+    games:
+      type: object
+      properties:
+        games:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: 'kaefughljdae374298u43'
+              currentTurn:
+                type: string
+                example: 'player1'
+              moves:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    tile:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                          example: 'A'
+                        score:
+                          type: number
+                          example: 1
+                    position:
+                      type: object
+                      properties:
+                        x:
+                          type: number
+                          example: 10
+                        y:
+                          type: number
+                          example: 12
+                    userId:
+                      type: string
+                      example: 'player1'
+                    id:
+                      type: string
+                      example: 'kaefughkjghjfgh374298u43'
+              board:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    tile:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                          example: 'B'
+                        score:
+                          type: number
+                          example: 2
+                    position:
+                      type: object
+                      properties:
+                        x:
+                          type: number
+                          example: 10
+                        y:
+                          type: number
+                          example: 11
+                    id:
+                      type: string
+                      example: 'kaefughkjghjfgh374298u43'
+              bag:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    value:
+                      type: string
+                      example: 'C'
+                    score:
+                      type: number
+                      example: 3
+                    id:
+                      type: string
+                      example: 'kaefughkjghjfgh374298u43'
+              players:
+                type: array
+                items: {
+                  oneOf: [
+                    {
+                      $ref: '#/components/schemas/playerOne'
+                    },
+                    {
+                      $ref: '#/components/schemas/playerTwo'
+                    }
+                  ]
+                }
+    playerOne:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: 'player1'
+        currentHand:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                example: 'D'
+              score:
+                type: number
+                example: 4
+              id:
+                type: string
+                example: 'kgfdhgjklikujghjilkjg'
+        id:
+          type: string
+          example: 'kaefughkjghjfgh374298u43'
+    playerTwo:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: 'player2'
+        currentHand:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                example: 'E'
+              score:
+                type: number
+                example: 5
+              id:
+                type: string
+                example: 'fhfjyguhiuo8i7u6rt7iy8ouoi'
+        id:
+          type: string
+          example: 't4e5r6t7iyo8uilkugjyfghj'
+
+                    
+              
