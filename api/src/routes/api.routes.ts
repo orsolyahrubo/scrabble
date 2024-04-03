@@ -16,5 +16,6 @@ router.use(express.json());
 router.post('/register', validateMiddleware(registerUserSchema), registerController.post);
 router.post('/login', validateMiddleware(loginUserSchema), loginController.post);
 router.get('/games', auth, gameController.get);
+router.get('/games/:gameId', auth, gameController.getOne);
 
 export default router;

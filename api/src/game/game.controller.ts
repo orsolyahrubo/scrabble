@@ -11,5 +11,15 @@ export const gameController = {
         } catch (error) {
             next(error);
         }
+    },
+    async getOne(req: any, res: Response, next: any) {
+        const { userId } = req.headers.loggedInUserData;
+        const { gameId } = req.params;
+        try {
+            const game = await gameService.getOneGame(gameId, userId);
+            res.status(200).json(game);
+        } catch (error) {
+            next(error);
+        }
     }
 }
