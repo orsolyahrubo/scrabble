@@ -8,7 +8,7 @@ export const gameService = {
     async getOneGame(gameId: string, userId: string): Promise<Game> {
         const game = (await GameModel.findOne({ _id: gameId }).elemMatch('players', { userId }));
         if (!game) {
-            let err: any = new Error('There is no such game or you are not a part of it.');
+            const err: any = new Error('There is no such game or you are not a part of it.');
             err.status = 400;
             throw err;
         }
